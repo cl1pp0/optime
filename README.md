@@ -1,7 +1,7 @@
 # optime
 Count operation time of your personal computer (similar to uptime, but w/o suspend phases)
 
-A Fiddled personal gimmick comprising:
+A fiddled personal gimmick comprising:
 
 * fork()
 * syslog()
@@ -25,7 +25,7 @@ $ killall optime
 
 ## optime client
 
-* optime client get the current operation time via UDS IPC from the optime daemon and prints it to STDOUT
+* optime client gets the current operation time via UDS IPC from the optime daemon and prints it to STDOUT
 
 Get current operation time:
 ```
