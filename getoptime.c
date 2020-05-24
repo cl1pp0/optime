@@ -18,7 +18,7 @@ int main ()
     
     if ((fd_sock = socket(AF_LOCAL, SOCK_STREAM, 0)) < 0)
     {
-        fprintf(stderr, "Cannot create socket.\n");
+        perror("Cannot create socket()");
         rc = EXIT_FAILURE;
         goto exit;
     }
@@ -29,14 +29,14 @@ int main ()
 
     if (connect(fd_sock, (const struct sockaddr *)&addr, addrlen) < 0)
     {
-        fprintf(stderr, "Cannot connect to daemon.\n");
+        perror("Cannot connect() to daemon");
         rc = EXIT_FAILURE;
         goto exit;
     }
 
     if (read(fd_sock, (void *)&timecount, sizeof(timecount)) < 0)
     {
-        fprintf(stderr, "Cannot read from socket.\n");
+        perror("Cannot read() from socket");
         rc = EXIT_FAILURE;
         goto exit;
     }
