@@ -119,6 +119,15 @@ int main()
     socklen_t addrlen;
     int rc = EXIT_SUCCESS;
 
+    /* only one process instance, this is a hack,
+     * there might be better ways to achieve this*/
+    if (!access(SOCK_PATH, R_OK))
+    {
+        fprintf(stderr, "Process instance is already running.\n");
+        rc = EXIT_FAILURE;
+        return rc;
+    }
+
     daemonize();
     syslog (LOG_NOTICE, "Optime started.");
 
@@ -163,6 +172,5 @@ exit:
     timer_delete(timer_id);
     syslog (LOG_NOTICE, "Optime terminated.");
     closelog();
-
     return rc;
 }

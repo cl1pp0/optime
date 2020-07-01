@@ -11,6 +11,7 @@
 int main ()
 {
     int timecount = -1;
+    int h, min, sec;
     int fd_sock;
     struct sockaddr_un addr;
     socklen_t addrlen;
@@ -40,8 +41,11 @@ int main ()
         rc = EXIT_FAILURE;
         goto exit;
     }
-
-    printf("%d:%02d\n", timecount/60, timecount%60);
+    
+    h = timecount/3600;
+    min = timecount/60 - h*60;
+    sec = timecount%60;
+    printf("%d:%02d:%02d\n", h, min, sec);
 
 exit:
     close(fd_sock);
