@@ -1,5 +1,5 @@
 all:
-	$(CC) -Wall -o optime -lrt optime.c
+	$(CC) -Wall -o optime optime.c -lrt
 	$(CC) -Wall -o getoptime getoptime.c
 
 start:
