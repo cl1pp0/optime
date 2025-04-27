@@ -82,11 +82,11 @@ static void daemonize()
     int x;
     for (x = sysconf(_SC_OPEN_MAX); x>=0; x--)
     {
-        close (x);
+        close(x);
     }
 
     /* Open the log file */
-    openlog ("optime", LOG_PID, LOG_DAEMON);
+    openlog("optime", LOG_PID, LOG_DAEMON);
 }
 
 void thread_handler()
@@ -129,14 +129,14 @@ int main()
     }
 
     daemonize();
-    syslog (LOG_NOTICE, "Optime started.");
+    syslog(LOG_NOTICE, "Optime started.");
 
     setup_timer(&timer_id);
-    syslog (LOG_NOTICE, "Timer started (interval %d s).", INTERVAL);
+    syslog(LOG_NOTICE, "Timer started (interval %d s).", INTERVAL);
 
     if ((fd_sock = socket(AF_LOCAL, SOCK_STREAM, 0)) < 0)
     {
-        syslog (LOG_ERR, "Cannot create socket: %s", strerror(errno));
+        syslog(LOG_ERR, "Cannot create socket: %s", strerror(errno));
         rc = EXIT_FAILURE;
         goto exit;
     }
@@ -148,14 +148,14 @@ int main()
 
     if (bind(fd_sock, (const struct sockaddr*)&addr, addrlen) < 0)
     {
-        syslog (LOG_ERR, "Cannot bind socket: %s", strerror(errno));
+        syslog(LOG_ERR, "Cannot bind socket: %s", strerror(errno));
         rc = EXIT_FAILURE;
         goto exit;
     }
 
     if (listen(fd_sock, 3) < 0)
     {
-        syslog (LOG_ERR, "Cannot listen on socket: %s", strerror(errno));
+        syslog(LOG_ERR, "Cannot listen on socket: %s", strerror(errno));
         rc = EXIT_FAILURE;
         goto exit;
     }
@@ -170,7 +170,7 @@ exit:
     close(fd_sock);
     unlink(SOCK_PATH);
     timer_delete(timer_id);
-    syslog (LOG_NOTICE, "Optime terminated.");
+    syslog(LOG_NOTICE, "Optime terminated.");
     closelog();
     return rc;
 }
